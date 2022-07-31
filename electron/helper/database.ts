@@ -15,12 +15,12 @@ export default class Database<T> {
     this.dirname = path.join(this.appUserData, 'database')
     this.path = path.join(this.dirname, `${file}.json`)
 
-    this.data = this.read()
-
     if (!this.valid(path.join(this.path))) {
       if (!this.valid(this.dirname)) fs.mkdirSync(this.dirname)
       fs.writeFileSync(this.path, '[]')
     }
+
+    this.data = this.read()
   }
 
   private valid(path: string) {
