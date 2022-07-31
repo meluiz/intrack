@@ -1,19 +1,28 @@
 import { app, BrowserWindow } from 'electron'
+import * as development from 'electron-is-dev'
 import * as path from 'path'
 
-let win: Electron.BrowserWindow | null
+let window: Electron.BrowserWindow | null
 
 function ready() {
-  win = new BrowserWindow({
+  window = new BrowserWindow({
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: false,
+      nodeIntegration: true,
+      contextIsolation: false,
+      preload: path.join(app.getPath('appData'), 'preload.js'),
     },
   })
-  win.maximize()
-  win.show()
 
-  win.loadURL('http://localhost:3000')
+  window.maximize()
+  window.show()
+
+  if (development) window.loadURL('http://localhost:3000')
+  else
+    window.loadFile(
+      `${path.join(app.getPath('appData'), '../build/index.html')}`
+    )
 }
 
 function windowAllClosed() {
