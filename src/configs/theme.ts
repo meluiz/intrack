@@ -60,6 +60,19 @@ const theme = extendTheme({
     Container: {
       variants: { fluid: { height: '100%' } },
     },
+    Button: {
+      variants: {
+        reset: {
+          colorScheme: 'transparent',
+          widht: 'auto',
+          height: 'auto',
+          minWidth: 'auto',
+          minHeight: 'auto',
+          p: 0,
+        },
+      },
+      _focus: { outline: 'none' },
+    },
     a: {
       textDecoration: 'none',
       _hover: { textDecoration: 'none' },
