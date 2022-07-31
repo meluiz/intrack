@@ -36,3 +36,21 @@ function activate() {
 app.whenReady().then(ready)
 app.on('activate', activate)
 app.on('window-all-closed', windowAllClosed)
+
+ipcMain.handle('create-user', function (events, args: User) {
+  const users = new Database<User[]>('users')
+  const data = users.data
+  const user = {
+    ...args,
+    _id: uuid(),
+    created_at: new Date(),
+    updated_at: new Date(),
+  }
+
+  if (data.length > 5) return
+
+  data.push(user)
+  users.write()
+
+  return user
+})
