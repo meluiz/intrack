@@ -1,15 +1,21 @@
 {
   "name": "intrack",
+  "description": "",
   "version": "0.1.0",
   "private": true,
+  "productName": "intrack",
+  "author": "meluiz",
+  "homepage": "./",
+  "main": "./output/main.js",
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "yarn start",
-    "electron:build": "tsc -p electron/tsconfig.json",
-    "electron": "yarn electron:build && electron ./dist/main.js"
+    "electron:build": "yarn build && electron-builder",
+    "electron:ts": "tsc -p electron/tsconfig.json",
+    "electron": "yarn electron:ts && electron ./output/main.js"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +60,8 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "cz-conventional-changelog": "3.3.0",
     "electron": "^19.0.10",
+    "electron-builder": "^23.1.0",
+    "electron-is-dev": "^2.0.0",
     "eslint": "^8.20.0",
     "eslint-config-next": "12.2.3",
     "eslint-config-prettier": "^8.5.0",
@@ -74,6 +82,24 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "build": {
+    "appId": "intrack",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./public/logo-favicon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "installerIcon": "./public/logo-favicon.ico",
+      "uninstallerIcon": "./public/logo-favicon.ico",
+      "uninstallDisplayName": "intrack",
+      "license": "license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }
