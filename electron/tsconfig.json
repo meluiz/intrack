@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "target": "ES2017",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "noImplicitAny": true,
     "sourceMap": false,
-    "outDir": "../dist",
+    "outDir": "../output",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules"]
     }
   },
-  "include": ["**/*"]
+  "include": ["**/*", "**/*.json"]
 }
